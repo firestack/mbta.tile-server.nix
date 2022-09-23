@@ -20,9 +20,9 @@ RUN /etc/init.d/postgresql start &&\
 
 #build osm2pgsql
 USER root
-RUN git clone git://github.com/openstreetmap/osm2pgsql.git ~postgres/src/osm2pgsql --depth 1
+RUN git clone https://github.com/openstreetmap/osm2pgsql.git ~postgres/src/osm2pgsql --depth 1
 RUN apt-get -y install make cmake g++ libboost-dev libboost-system-dev libboost-filesystem-dev libexpat1-dev\
-  zlib1g-dev libbz2-dev libpq-dev libgeos-dev libgeos++-dev libproj-dev lua5.2 liblua5.2-dev osmium-tool
+  zlib1g-dev libbz2-dev libpq-dev libgeos-dev libgeos++-dev libproj-dev lua5.2 liblua5.2-dev osmctools
 RUN cd ~postgres/src/osm2pgsql && mkdir build && cd build && cmake .. && make && make install
 
 #install Mapnik
@@ -30,11 +30,15 @@ RUN apt-get -y install autoconf apache2-dev libtool libxml2-dev libbz2-dev libge
   libproj-dev gdal-bin libmapnik-dev mapnik-utils python-mapnik sudo
 
 #build mod_tile and renderd
-RUN git clone https://github.com/openstreetmap/mod_tile.git ~postgres/src/mod_tile --depth 1
-RUN cd ~postgres/src/mod_tile && ./autogen.sh && ./configure && make && make install && make install-mod_tile && ldconfig
+# Newer commits in mod_tile remove the renderd.init file since the project is now in Debian / Ubuntu
+# official repositories, which provide their own init configuration, but those packages are only in
+# newer versions. Once we update this container to use 22.04, or another newer Ubuntu version, we can
+# install mod_tile that way and avoid having to build it ourselves entirely.
+RUN git clone https://github.com/openstreetmap/mod_tile.git ~postgres/src/mod_tile
+RUN cd ~postgres/src/mod_tile && git reset fd5988fc5877c51838ad96991d6e2912cfaf7d61 --hard && ./autogen.sh && ./configure && make && make install && make install-mod_tile && ldconfig
 
 #build carto (map style configuration)
-RUN apt-get install -y npm nodejs
+RUN apt-get install -y npm nodejs node-gyp nodejs-dev libssl1.0-dev
 RUN npm install -g carto
 
 # install kosmtik
@@ -63,7 +67,7 @@ COPY etc/apache2_kosmtik.conf /etc/apache2/sites-available/kosmtik.conf
 
 # additional fonts requred for pre-rendering
 RUN cd /usr/share/fonts/truetype/noto/ && \
-  wget https://github.com/googlei18n/noto-emoji/raw/master/fonts/NotoEmoji-Regular.ttf
+  wget https://github.com/googlefonts/noto-emoji/raw/main/fonts/NotoColorEmoji.ttf
 
 # generate tile scripts
 RUN apt-get -y install python-pip
@@ -71,10 +75,6 @@ RUN pip install awscli
 RUN aws configure set default.s3.max_concurrent_requests 100
 COPY etc/generate_tiles.py /var/lib/postgresql/src/generate_tiles.py
 RUN chmod a+x /var/lib/postgresql/src/generate_tiles.py
-
-# install tilemill
-RUN git clone https://github.com/tilemill-project/tilemill.git ~postgres/src/tilemill --depth 1
-RUN cd ~postgres/src/tilemill && npm install
 
 # install and configure styles
 RUN git clone https://github.com/jacobtoye/osm-bright.git /style --depth 1
