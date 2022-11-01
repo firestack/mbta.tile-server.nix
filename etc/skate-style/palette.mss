@@ -38,7 +38,7 @@ Map { font-directory: url(./fonts); }
 /* ================================================================== */
 
 @land:              #f4f4f5;
-@land_low: 			#f0ede5;
+@land_low: 		     #f4f4f5;
 @water:             #c8c9e5;
 @grass:             #c9e2c1;
 @beach:             #FFEEC7;
@@ -48,15 +48,15 @@ Map { font-directory: url(./fonts); }
 @agriculture:       #F2E8B6;
 
 @building:          #f4f4f5;
-@building_line:     #ecedee;
+@building_line:     #DBDDE1;
 @building_case:     #d3d1c8;
 @hospital:          #ebe3da;
-@school:            #f0ead6;
+@school:            #f4f4f5;
 @sports:            #c9e2c1;
 
 @residential:       #f0ede5;
 @commercial:        @residential * 0.97;
-@industrial:        @residential * 0.96;
+@industrial:        #f4f4f5;
 @parking:           #e5e4df;
 
 /* ================================================================== */
