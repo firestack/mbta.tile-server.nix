@@ -48,7 +48,7 @@ Map { font-directory: url(./fonts); }
 @agriculture:       #F2E8B6;
 
 @building:          #f4f4f5;
-@building_line:     #DBDDE1;
+@building_line:     #dbdde1;
 @building_case:     #d3d1c8;
 @hospital:          #ebe3da;
 @school:            #f4f4f5;
