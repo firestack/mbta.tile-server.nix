@@ -54,8 +54,8 @@ Map { font-directory: url(./fonts); }
 @school:            #f4f4f5;
 @sports:            #c9e2c1;
 
-@residential:       #f0ede5;
-@commercial:        @residential * 0.97;
+@residential:       #f4f4f5;
+@commercial:        #f4f4f5;
 @industrial:        #f4f4f5;
 @parking:           #e5e4df;
 
