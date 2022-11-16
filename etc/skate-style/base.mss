@@ -26,7 +26,7 @@
 #landuse[zoom>12] {
   [type='cemetery']      { polygon-fill: @cemetery; }
   [type='college']       { polygon-fill: @school; }
-  [type='commercial']    { polygon-fill: @industrial; }
+  [type='commercial']    { polygon-fill: @commercial; }
   [type='common']        { polygon-fill: @park; }
   [type='forest']        { polygon-fill: @wooded; }
   [type='golf_course']   { polygon-fill: @sports; }

@@ -37,8 +37,10 @@ Map { font-directory: url(./fonts); }
 /* LANDUSE & LANDCOVER COLORS
 /* ================================================================== */
 
-@land:              #f4f4f5;
-@land_low: 		     #f4f4f5;
+@background_grey:   #f4f4f5;
+
+@land:              @background_grey;
+@land_low: 		     @background_grey;
 @water:             #c8c9e5;
 @grass:             #c9e2c1;
 @beach:             #FFEEC7;
@@ -47,16 +49,16 @@ Map { font-directory: url(./fonts); }
 @wooded:            #c9e2c1;
 @agriculture:       #F2E8B6;
 
-@building:          #f4f4f5;
+@building:          @background_grey;
 @building_line:     #dbdde1;
 @building_case:     #d3d1c8;
 @hospital:          #ebe3da;
-@school:            #f4f4f5;
+@school:            @background_grey;
 @sports:            #c9e2c1;
 
-@residential:       #f0ede5;
-@commercial:        @residential * 0.97;
-@industrial:        #f4f4f5;
+@residential:       @background_grey;
+@commercial:        @background_grey;
+@industrial:        @background_grey;
 @parking:           #e5e4df;
 
 /* ================================================================== */
