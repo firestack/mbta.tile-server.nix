@@ -39,22 +39,25 @@ Map { font-directory: url(./fonts); }
 
 @background_grey:   #f4f4f5;
 
+@greenspace:        #b1deaf;
+@waterway_label:    #2c45c6;
+
 @land:              @background_grey;
-@land_low: 		     @background_grey;
-@water:             #c8c9e5;
-@grass:             #c9e2c1;
-@beach:             #FFEEC7;
-@park:              #c9e2c1;
-@cemetery:          #c9e2c1;
-@wooded:            #c9e2c1;
-@agriculture:       #F2E8B6;
+@land_low:          @background_grey;
+@water:             #b6bee7;
+@grass:             @greenspace;
+@beach:             #ffeec7;
+@park:              @greenspace;
+@cemetery:          @greenspace;
+@wooded:            @greenspace;
+@agriculture:       #f2e8b6;
 
 @building:          @background_grey;
 @building_line:     #dbdde1;
 @building_case:     #d3d1c8;
 @hospital:          #ebe3da;
 @school:            @background_grey;
-@sports:            #c9e2c1;
+@sports:            @greenspace;
 
 @residential:       @background_grey;
 @commercial:        @background_grey;
@@ -128,6 +131,9 @@ Map { font-directory: url(./fonts); }
 /* We set up a default halo color for places so you can edit them all
    at once or override each individually. */
 @place_halo:        fadeout(#fff,34%);
+
+@halo_white:        @place_halo;
+@greenspace_halo:   @halo_white;
 
 @country_text:      #222;
 @country_halo:      @place_halo;

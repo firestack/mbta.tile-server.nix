@@ -1,12 +1,12 @@
 /* LABELS.MSS CONTENTS:
  * - place names
  * - area labels
- * - waterway labels 
+ * - waterway labels
  */
 
 /* Font sets are defined in palette.mss */
 
-/* Mapnik does not yet support character-spacing adjustments for 
+/* Mapnik does not yet support character-spacing adjustments for
    labels placed along a line. We can fake this using the replace()
    function in the text-name parameter by replacing each character
    with itself followed by one or more spaces. */
@@ -220,16 +220,16 @@
     text-halo-radius: 2;
     text-transform: uppercase;
     text-character-spacing: 1;
-    text-wrap-width: 60; 
+    text-wrap-width: 60;
     text-line-spacing: 1;
   }
   [zoom>=16] {
     text-character-spacing: 2;
     text-wrap-width: 120;
     text-line-spacing: 2;
-  } 
+  }
   [zoom>=17] {
-    text-size:14; 
+    text-size:14;
     text-character-spacing: 3;
     text-wrap-width: 160;
     text-line-spacing: 4;
@@ -294,25 +294,25 @@
     [type='park'][zoom>=10] {
       text-face-name: @sans;
       text-fill: @park * 0.6;
-      text-halo-fill: lighten(@park, 10);
+      text-halo-fill: @greenspace_halo;
     }
     [type='golf_course'][zoom>=10] {
       text-fill: @sports * 0.6;
-      text-halo-fill: lighten(@sports, 10);
+      text-halo-fill: @greenspace_halo;
     }
     [type='cemetery'][zoom>=10] {
       text-fill: @cemetery * 0.6;
-      text-halo-fill: lighten(@cemetery, 10);
+      text-halo-fill: @greenspace_halo;
     }
     [type='hospital'][zoom>=10] {
       text-fill: @hospital * 0.6;
-      text-halo-fill: lighten(@hospital, 10);
+      text-halo-fill: @greenspace_halo;
     }
     [type='college'][zoom>=10],
     [type='school'][zoom>=10],
     [type='university'][zoom>=10] {
       text-fill: @school * 0.6;
-      text-halo-fill: lighten(@school, 10);
+      text-halo-fill: @greenspace_halo;
     }
     [type='water'][zoom>=10] {
       text-fill: @water * 0.6;
@@ -346,7 +346,7 @@
     text-clip: false;
   }
 }
-   
+
 #poi[type='university'][zoom>=15],
 #poi[type='hospital'][zoom>=16],
 #poi[type='school'][zoom>=17],
@@ -368,14 +368,14 @@
 #waterway_label[type='stream'][zoom>=17] {
   text-name: '[name]';
   text-face-name: @sans;
-  text-fill: @water * 0.75;
+  text-fill: @waterway_label;
   text-halo-fill: fadeout(lighten(@water,5%),25%);
   text-halo-radius: 1;
   text-placement: line;
   text-min-distance: 400;
   text-size: 10;
   text-clip: false;
-  text-avoid-edges: true; 
+  text-avoid-edges: true;
   [type='river'][zoom>=12] {
     text-size: 12;
   }
@@ -543,7 +543,7 @@
   text-placement: line;
   text-size: 11;
   text-clip: false;
-  text-avoid-edges: true; 
+  text-avoid-edges: true;
 }
 
 /* ****************************************************************** */
