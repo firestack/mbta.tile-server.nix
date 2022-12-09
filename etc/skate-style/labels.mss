@@ -129,19 +129,16 @@
     text-size:15;
     text-character-spacing: 2;
     text-wrap-width: 200;
-    text-transform: uppercase;
   }
   [zoom=14] {
     text-size:16;
     text-character-spacing: 4;
     text-wrap-width: 300;
-    text-transform: uppercase;
   }
   [zoom=15] {
     text-size:17;
     text-character-spacing: 6;
     text-wrap-width: 400;
-    text-transform: uppercase;
   }
 }
 
@@ -168,7 +165,6 @@
     text-line-spacing: 1;
   }
   [zoom>=13]{
-    text-transform: uppercase;
     text-character-spacing: 1;
     text-line-spacing: 2;
   }
@@ -219,7 +215,6 @@
   [zoom>=15] {
     text-size:13;
     text-halo-radius: 2;
-    text-transform: uppercase;
     text-character-spacing: 1;
     text-wrap-width: 60;
     text-line-spacing: 1;
