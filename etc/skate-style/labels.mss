@@ -398,13 +398,13 @@
 /* ================================================================== */
 
 #motorway_label[zoom>=11][reflen>0] {
-  shield-name: "[ref]";
+  shield-name: "[refs]";
   shield-size: 9;
   shield-placement: line;
   shield-repeat-distance: 400;
   shield-spacing: 760;
   shield-face-name: @sans_bold;
-  shield-fill: #fff;
+  shield-fill: #000000;
   shield-margin: 10;
   shield-avoid-edges: true;
   shield-file: url(img/shield-motorway-1.png);
