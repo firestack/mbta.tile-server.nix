@@ -77,42 +77,47 @@ Map { font-directory: url(./fonts); }
  *         inner fill (inline).
  */
 
-@motorway_line:     #ffffff;
-@motorway_fill:     #ffffff;
-@motorway_case:     #e9e9e9;
+@motorway_line:     #FFE1C6;
+@motorway_fill:     @motorway_line;
+@motorway_case:     #EFC59E;
 
-@trunk_line:        darken(#ffffff,5);
-@trunk_fill:        #ffffff;
-@trunk_case:        #e9e9e9;
+@trunk_line:        @motorway_line;
+@trunk_fill:        @motorway_fill;
+@trunk_case:        @motorway_case;
 
-/* What are these, do we need to deferentiate them? */
-@primary_line:      @trunk_line;
-@primary_fill:      @trunk_fill;
-@primary_case:      @trunk_case;
+@primary_line:      #FCF8D8;
+@primary_fill:      @primary_line;
+@primary_case:      #E4DAAF;
 
-@secondary_line:    #ffffff;
-@secondary_fill:    #ffffff;
-@secondary_case:    #e9e9e9;
+@minor_road_line:   #FFFFFF;
+@minor_road_fill:   #FFFFFF;
+@minor_road_case:   #e9e9e9;
 
-@standard_line:     #ffffff;
-@standard_fill:     #fff;
-@standard_case:     #e9e9e9;
+@secondary_line:    @minor_road_line;
+@secondary_fill:    @minor_road_fill;
+@secondary_case:    @minor_road_case;
 
-@service_line:      #ffffff;
-@service_fill:      #ffffff;
-@service_case:      #e9e9e9;
+@standard_line:     @minor_road_line;
+@standard_fill:     @minor_road_fill;
+@standard_case:     @minor_road_case;
 
-@pedestrian_line:   #ffffff;
-@pedestrian_fill:   #ffffff;
-@pedestrian_case:   #e9e9e9;
+@service_line:      @minor_road_line;
+@service_fill:      @minor_road_fill;
+@service_case:      @minor_road_case;
+
+@pedestrian_line:   @minor_road_line;
+@pedestrian_fill:   @minor_road_fill;
+@standard_case:     @minor_road_case;
+@pedestrian_case:   @minor_road_case;
+
 
 @cycle_line:        @standard_line;
-@cycle_fill:        #ffffff;
+@cycle_fill:        @minor_road_fill;
 @cycle_case:        @land;
 
 @rail_line:         #dad9d9;
 @rail_fill:         #dad9d9;
-@rail_case:         #e9e9e9;
+@rail_case:         @minor_road_case;
 
 @aeroway:           #ddd;
 
