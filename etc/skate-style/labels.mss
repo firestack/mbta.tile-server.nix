@@ -405,8 +405,8 @@
   shield-repeat-distance: 400;
   shield-spacing: 760;
   shield-margin: 40;
-  shield-face-name: @sans_bold;
-  shield-fill: #000000;
+  shield-face-name: @sans;
+  shield-fill: @motorway_shield_text;
   shield-avoid-edges: true;
   shield-file: url("img/shields/motorway_[width]x[height].svg")
   
