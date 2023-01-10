@@ -471,7 +471,8 @@
 }
 
 #mainroad_label[type='tertiary'][zoom>14],
-#minorroad_label[zoom>14] {
+#minorroad_label[zoom>14],
+#alley_label[zoom>=17] {
   text-name:'[name]';
   text-face-name:@sans;
   text-label-position-tolerance: 5;
