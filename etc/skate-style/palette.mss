@@ -158,14 +158,18 @@ Map { font-directory: url(./fonts); }
 @motorway_halo:     lighten(@motorway_fill,15);
 @motorway_shield_text: #3C3F4C;
 
-@trunk_text:        spin(darken(@trunk_fill,50),-15);
-@trunk_halo:        lighten(@trunk_fill,15);
-@primary_text:      spin(darken(@primary_fill,50),-15);
-@primary_halo:      lighten(@primary_fill,15);
-@secondary_text:    spin(darken(@secondary_fill,50),-15);
-@secondary_halo:    lighten(@secondary_fill,15);
 @standard_text:     spin(darken(@standard_fill,60),-15);
 @standard_halo:     lighten(@standard_fill,15);
+
+@trunk_text:        spin(darken(@trunk_fill,50),-15);
+@trunk_halo:        lighten(@trunk_fill,15);
+
+@primary_text:      @standard_text;
+@primary_halo:      lighten(@primary_fill,15);
+
+@secondary_text:    spin(darken(@secondary_fill,50),-15);
+@secondary_halo:    lighten(@secondary_fill,15);
+
 
 @road_text:         #777;
 @road_halo:         #fff;
