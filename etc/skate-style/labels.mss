@@ -491,21 +491,22 @@
   [zoom>=17] { text-size:13; }
 }
 
-#junction_label[zoom >= 16][ref !=null] {
-  shield-name: "[refs]";
-  shield-size: 9;
-  shield-face-name: @sans;
-  shield-fill: @motorway_junction_shield_text;
-  shield-file: url("img/shields/exit_[width]x[height].svg")
+#junction_label[zoom >= 17] {
+  [ref !=null] {
+    shield-size: 9;
+    shield-face-name: @sans;
+    shield-name: "[refs]";
+    shield-fill: @motorway_junction_shield_text;
+    shield-file: url("img/shields/exit_[width]x[height].svg")
   }
-
-  #junction_label[zoom >= 16][ref=null][name!=null] {
-  shield-name: "[name]";
-  shield-size: 9;
-  shield-face-name: @sans;
-  shield-fill: @motorway_junction_shield_text;
-  shield-file: url("img/shields/exit_[namelen]x1.svg")
+  [ref=null][name!=null] {
+    shield-size: 9;
+    shield-face-name: @sans;
+    shield-name: "[name]";
+    shield-fill: @motorway_junction_shield_text;
+    shield-file: url("img/shields/exit_[namelen]x1.svg")
   }
+}
 
 /* ================================================================== */
 /* ONE-WAY ARROWS
