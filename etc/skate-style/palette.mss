@@ -157,6 +157,7 @@ Map { font-directory: url(./fonts); }
 @motorway_text:     spin(darken(@motorway_fill,50),-15);
 @motorway_halo:     lighten(@motorway_fill,15);
 @motorway_shield_text: #3C3F4C;
+@motorway_junction_shield_text: #FFFFFF;
 
 @standard_text:     spin(darken(@standard_fill,60),-15);
 @standard_halo:     lighten(@standard_fill,15);
