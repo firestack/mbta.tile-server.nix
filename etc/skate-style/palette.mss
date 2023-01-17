@@ -77,42 +77,47 @@ Map { font-directory: url(./fonts); }
  *         inner fill (inline).
  */
 
-@motorway_line:     #ffffff;
-@motorway_fill:     #ffffff;
-@motorway_case:     #e9e9e9;
+@motorway_line:     #ffe1c6;
+@motorway_fill:     @motorway_line;
+@motorway_case:     #efc59e;
 
-@trunk_line:        darken(#ffffff,5);
-@trunk_fill:        #ffffff;
-@trunk_case:        #e9e9e9;
+@trunk_line:        @motorway_line;
+@trunk_fill:        @motorway_fill;
+@trunk_case:        @motorway_case;
 
-/* What are these, do we need to deferentiate them? */
-@primary_line:      @trunk_line;
-@primary_fill:      @trunk_fill;
-@primary_case:      @trunk_case;
+@primary_line:      #fcf8d8;
+@primary_fill:      @primary_line;
+@primary_case:      #e4daaf;
 
-@secondary_line:    #ffffff;
-@secondary_fill:    #ffffff;
-@secondary_case:    #e9e9e9;
+@minor_road_line:   #ffffff;
+@minor_road_fill:   #ffffff;
+@minor_road_case:   #e9e9e9;
 
-@standard_line:     #ffffff;
-@standard_fill:     #fff;
-@standard_case:     #e9e9e9;
+@secondary_line:    @minor_road_line;
+@secondary_fill:    @minor_road_fill;
+@secondary_case:    @minor_road_case;
 
-@service_line:      #ffffff;
-@service_fill:      #ffffff;
-@service_case:      #e9e9e9;
+@standard_line:     @minor_road_line;
+@standard_fill:     @minor_road_fill;
+@standard_case:     @minor_road_case;
 
-@pedestrian_line:   #ffffff;
-@pedestrian_fill:   #ffffff;
-@pedestrian_case:   #e9e9e9;
+@service_line:      @minor_road_line;
+@service_fill:      @minor_road_fill;
+@service_case:      @minor_road_case;
+
+@pedestrian_line:   @minor_road_line;
+@pedestrian_fill:   @minor_road_fill;
+@standard_case:     @minor_road_case;
+@pedestrian_case:   @minor_road_case;
+
 
 @cycle_line:        @standard_line;
-@cycle_fill:        #ffffff;
+@cycle_fill:        @minor_road_fill;
 @cycle_case:        @land;
 
 @rail_line:         #dad9d9;
 @rail_fill:         #dad9d9;
-@rail_case:         #e9e9e9;
+@rail_case:         @minor_road_case;
 
 @aeroway:           #ddd;
 
@@ -151,14 +156,21 @@ Map { font-directory: url(./fonts); }
 
 @motorway_text:     spin(darken(@motorway_fill,50),-15);
 @motorway_halo:     lighten(@motorway_fill,15);
-@trunk_text:        spin(darken(@trunk_fill,50),-15);
-@trunk_halo:        lighten(@trunk_fill,15);
-@primary_text:      spin(darken(@primary_fill,50),-15);
-@primary_halo:      lighten(@primary_fill,15);
-@secondary_text:    spin(darken(@secondary_fill,50),-15);
-@secondary_halo:    lighten(@secondary_fill,15);
+@motorway_shield_text: #3C3F4C;
+@motorway_junction_shield_text: #FFFFFF;
+
 @standard_text:     spin(darken(@standard_fill,60),-15);
 @standard_halo:     lighten(@standard_fill,15);
+
+@trunk_text:        spin(darken(@trunk_fill,50),-15);
+@trunk_halo:        lighten(@trunk_fill,15);
+
+@primary_text:      @standard_text;
+@primary_halo:      lighten(@primary_fill,15);
+
+@secondary_text:    spin(darken(@secondary_fill,50),-15);
+@secondary_halo:    lighten(@secondary_fill,15);
+
 
 @road_text:         #777;
 @road_halo:         #fff;
