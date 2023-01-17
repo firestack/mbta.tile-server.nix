@@ -77,20 +77,20 @@ Map { font-directory: url(./fonts); }
  *         inner fill (inline).
  */
 
-@motorway_line:     #FFE1C6;
+@motorway_line:     #ffe1c6;
 @motorway_fill:     @motorway_line;
-@motorway_case:     #EFC59E;
+@motorway_case:     #efc59e;
 
 @trunk_line:        @motorway_line;
 @trunk_fill:        @motorway_fill;
 @trunk_case:        @motorway_case;
 
-@primary_line:      #FCF8D8;
+@primary_line:      #fcf8d8;
 @primary_fill:      @primary_line;
-@primary_case:      #E4DAAF;
+@primary_case:      #e4daaf;
 
-@minor_road_line:   #FFFFFF;
-@minor_road_fill:   #FFFFFF;
+@minor_road_line:   #ffffff;
+@minor_road_fill:   #ffffff;
 @minor_road_case:   #e9e9e9;
 
 @secondary_line:    @minor_road_line;
