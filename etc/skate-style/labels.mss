@@ -307,6 +307,7 @@
         text-dy: 16;
         marker-placement: point;
         marker-file: url("img/markers/amenities/hospital.svg");
+        marker-fill: @hospital_icon;
       }
     }
     [type='college'][zoom>=10],
@@ -318,6 +319,7 @@
         text-dy: 16;
         marker-placement: point;
         marker-file: url("img/markers/amenities/school.svg");
+        marker-fill: @school_icon;
       }
     }
     [type='water'][zoom>=10] {
@@ -359,6 +361,16 @@
   [type='library'], {
     marker-placement: point;
     marker-file: url("img/markers/amenities/[type].svg");
+  }
+
+  [type='police'] {
+   marker-fill:  @police_icon;
+  }
+  [type='fire_station'] {
+    marker-fill: @fire_station_icon;
+  }
+    [type='library'] {
+    marker-fill: @library_icon;
   }
 }
 

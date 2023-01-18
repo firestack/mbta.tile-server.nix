@@ -191,6 +191,12 @@ Map { font-directory: url(./fonts); }
 @ferry_text:        #566b82;
 @ferry_halo:        rgba(191,213,238,0.66);
 
+@library_icon:      #dddf5d;
+@fire_station_icon: #ff675e;
+@police_icon:       #5Da9e8;
+@school_icon:       #76cbc0;
+@hospital_icon:     #f698ae;
+
 /* ****************************************************************** */
 
 
