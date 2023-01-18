@@ -303,12 +303,22 @@
     [type='hospital'][zoom>=10] {
       text-fill: @hospital * 0.6;
       text-halo-fill: @greenspace_halo;
+      [zoom>=16] {
+        text-dy: 16;
+        marker-placement: point;
+        marker-file: url("img/markers/amenities/hospital.svg");
+      }
     }
     [type='college'][zoom>=10],
     [type='school'][zoom>=10],
     [type='university'][zoom>=10] {
       text-fill: @school * 0.6;
       text-halo-fill: @greenspace_halo;
+      [zoom>=16] {
+        text-dy: 16;
+        marker-placement: point;
+        marker-file: url("img/markers/amenities/school.svg");
+      }
     }
     [type='water'][zoom>=10] {
       text-fill: @water * 0.6;
@@ -343,17 +353,14 @@
   }
 }
 
-#poi[type='university'][zoom>=15],
-#poi[type='hospital'][zoom>=16],
-#poi[type='school'][zoom>=17],
-#poi[type='library'][zoom>=17] {
-  text-name:"[name]";
-  text-face-name:@sans;
-  text-size:10;
-  text-wrap-width:30;
-  text-fill: @poi_text;
+#area_label[zoom >=16] {
+  [type='police'],
+  [type='fire_station'],
+  [type='library'], {
+    marker-placement: point;
+    marker-file: url("img/markers/amenities/[type].svg");
+  }
 }
-
 
 /* ================================================================== */
 /* WATERWAY LABELS

@@ -80,7 +80,8 @@ RUN chmod a+x /var/lib/postgresql/src/generate_tiles.py
 RUN git clone https://github.com/jacobtoye/osm-bright.git /style --depth 1
 COPY etc/configure.py /style/configure.py
 COPY etc/osm-smartrak.osm2pgsql.mml /style/themes/osm-smartrak/osm-smartrak.osm2pgsql.mml
-COPY etc/skate-style/img/shields /style/themes/osm-smartrak/img/shields
+COPY etc/skate-style/img/. /style/themes/osm-smartrak/img
+
 COPY etc/default-style/palette.mss /style/themes/default/palette.mss
 COPY etc/default-style/labels.mss /style/themes/default/labels.mss
 COPY etc/skate-style/palette.mss /style/themes/skate/palette.mss
