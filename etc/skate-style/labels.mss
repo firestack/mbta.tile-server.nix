@@ -319,7 +319,7 @@
         text-dy: 16;
         marker-placement: point;
         marker-file: url("img/markers/amenities/school.svg");
-        marker-fill: @school_icon;
+        marker-fill: @school_icon
       }
     }
     [type='water'][zoom>=10] {
@@ -359,17 +359,28 @@
   [type='police'],
   [type='fire_station'],
   [type='library'], {
+    text-name: "[name]";
+    text-halo-radius: 1.5;
+    text-halo-fill: @greenspace_halo;
+    text-face-name:@sans;
+    text-size: 11;
+    text-wrap-width: 30;
+    text-dy: 16;
+    text-vertical-alignment: bottom;
     marker-placement: point;
     marker-file: url("img/markers/amenities/[type].svg");
   }
 
   [type='police'] {
-   marker-fill:  @police_icon;
+    text-fill: @police_icon;
+    marker-fill:  @police_icon;
   }
   [type='fire_station'] {
+    text-fill: @fire_station_icon;
     marker-fill: @fire_station_icon;
   }
     [type='library'] {
+    text-fill: @library_icon;
     marker-fill: @library_icon;
   }
 }
