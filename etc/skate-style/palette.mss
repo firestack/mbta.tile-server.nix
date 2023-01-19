@@ -138,6 +138,8 @@ Map { font-directory: url(./fonts); }
 @place_halo:        fadeout(#fff,34%);
 
 @halo_white:        @place_halo;
+
+@greenspace_text:   #0B4D08;
 @greenspace_halo:   @halo_white;
 
 @country_text:      #222;
@@ -191,11 +193,11 @@ Map { font-directory: url(./fonts); }
 @ferry_text:        #566b82;
 @ferry_halo:        rgba(191,213,238,0.66);
 
-@library_icon:      #dddf5d;
-@fire_station_icon: #ff675e;
-@police_icon:       #5Da9e8;
-@school_icon:       #76cbc0;
-@hospital_icon:     #f698ae;
+@library_text:     #6b541f;
+@fire_station_text: #B02A37;
+@police_text:      #165C96;
+@school_text:      #103f4a;
+@hospital_text:    #6d0937;
 
 /* ****************************************************************** */
 

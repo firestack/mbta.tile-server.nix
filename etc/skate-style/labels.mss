@@ -289,25 +289,25 @@
     // Specific style overrides for different types of areas:
     [type='park'][zoom>=10] {
       text-face-name: @sans;
-      text-fill: @park * 0.6;
+      text-fill: @greenspace_text;
       text-halo-fill: @greenspace_halo;
     }
     [type='golf_course'][zoom>=10] {
-      text-fill: @sports * 0.6;
+      text-fill: @greenspace_text;
       text-halo-fill: @greenspace_halo;
     }
     [type='cemetery'][zoom>=10] {
-      text-fill: @cemetery * 0.6;
+      text-fill: @greenspace_text;
       text-halo-fill: @greenspace_halo;
     }
     [type='hospital'][zoom>=10] {
       text-fill: @hospital * 0.6;
       text-halo-fill: @greenspace_halo;
-      [zoom>=16] {
+      [zoom>=17] {
+        text-fill: @hospital_text;
         text-dy: 16;
         marker-placement: point;
         marker-file: url("img/markers/amenities/hospital.svg");
-        marker-fill: @hospital_icon;
       }
     }
     [type='college'][zoom>=10],
@@ -315,11 +315,11 @@
     [type='university'][zoom>=10] {
       text-fill: @school * 0.6;
       text-halo-fill: @greenspace_halo;
-      [zoom>=16] {
+      [zoom>=17] {
+        text-fill: @school_text;
         text-dy: 16;
         marker-placement: point;
         marker-file: url("img/markers/amenities/school.svg");
-        marker-fill: @school_icon
       }
     }
     [type='water'][zoom>=10] {
@@ -355,7 +355,7 @@
   }
 }
 
-#area_label[zoom >=16] {
+#area_label[zoom >=17] {
   [type='police'],
   [type='fire_station'],
   [type='library'], {
@@ -372,16 +372,13 @@
   }
 
   [type='police'] {
-    text-fill: @police_icon;
-    marker-fill:  @police_icon;
+    text-fill: @police_text;
   }
   [type='fire_station'] {
-    text-fill: @fire_station_icon;
-    marker-fill: @fire_station_icon;
+    text-fill: @fire_station_text;
   }
     [type='library'] {
-    text-fill: @library_icon;
-    marker-fill: @library_icon;
+    text-fill: @library_text;
   }
 }
 
@@ -516,7 +513,6 @@
   text-spacing: 100;
   text-size:11;
   text-clip: false;
-  text-min-padding: 5;
   [zoom>=15] { text-size:12; }
   [zoom>=17] { text-size:13; }
 }
