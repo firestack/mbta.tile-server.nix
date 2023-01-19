@@ -305,9 +305,11 @@
       text-halo-fill: @greenspace_halo;
       [zoom>=17] {
         text-fill: @hospital_text;
-        text-dy: 16;
+        text-vertical-alignment: bottom;
         marker-placement: point;
         marker-file: url("img/markers/amenities/hospital.svg");
+        marker-transform: "translate(0, -16)"
+
       }
     }
     [type='college'][zoom>=10],
@@ -317,9 +319,11 @@
       text-halo-fill: @greenspace_halo;
       [zoom>=17] {
         text-fill: @school_text;
-        text-dy: 16;
+        text-vertical-alignment: bottom;
         marker-placement: point;
         marker-file: url("img/markers/amenities/school.svg");
+        marker-transform: "translate(0, -16)"
+
       }
     }
     [type='water'][zoom>=10] {
@@ -364,11 +368,12 @@
     text-halo-fill: @greenspace_halo;
     text-face-name:@sans;
     text-size: 11;
+    text-clip: false;
     text-wrap-width: 30;
-    text-dy: 16;
     text-vertical-alignment: bottom;
     marker-placement: point;
     marker-file: url("img/markers/amenities/[type].svg");
+    marker-transform: "translate(0, -16)"
   }
 
   [type='police'] {
