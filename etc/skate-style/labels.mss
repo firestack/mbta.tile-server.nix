@@ -268,6 +268,16 @@
 // AREA LABELS
 // =====================================================================
 
+@small_icon_width: 19;
+@small_icon_height: 23;
+@small_icon_transform: translate(0, @small_icon_height / 2);
+
+@large_icon_width: 22;
+@large_icon_height: 26.63;
+@large_icon_transform: translate(0, -@large_icon_height / 2);
+
+@icon_y_offset: 3;
+
 #area_label {
   // Bring in labels gradually as one zooms in, bases on polygon area
   [zoom>=10][area>102400000],
@@ -306,10 +316,16 @@
       [zoom>=17] {
         text-fill: @hospital_text;
         text-vertical-alignment: bottom;
+        text-dy: @icon_y_offset;
         marker-placement: point;
         marker-file: url("img/markers/amenities/hospital.svg");
-        marker-transform: "translate(0, -16)"
-
+        marker-transform: @large_icon_transform;
+        marker-width: @small_icon_width;
+        marker-height: @small_icon_height;
+      }
+      [zoom>=18] {
+        marker-width: @large_icon_width;
+        marker-height: @large_icon_height;
       }
     }
     [type='college'][zoom>=10],
@@ -320,12 +336,35 @@
       [zoom>=17] {
         text-fill: @school_text;
         text-vertical-alignment: bottom;
+        text-dy: @icon_y_offset;
         marker-placement: point;
         marker-file: url("img/markers/amenities/school.svg");
-        marker-transform: "translate(0, -16)"
+        marker-transform: @large_icon_transform;
+        marker-width: @small_icon_width;
+        marker-height: @small_icon_height;
 
       }
-    }
+      [zoom>=18] {
+        marker-width: @large_icon_width;
+        marker-height: @large_icon_height;
+      }
+    } 
+
+    [type='police'][zoom >=18],
+    [type='fire_station'][zoom >=18],
+    [type='library'][zoom >=18] {
+      text-dy: @icon_y_offset;
+      text-vertical-alignment: bottom;
+      marker-placement: point;
+      marker-file: url("img/markers/amenities/[type].svg");
+      marker-transform: @large_icon_transform;
+      marker-width: @large_icon_width;
+      marker-height: @large_icon_height;
+    
+      [type='police'] { text-fill: @police_text; }
+      [type='fire_station'] { text-fill: @fire_station_text; }
+      [type='library'] { text-fill: @library_text; }
+   }
     [type='water'][zoom>=10] {
       text-fill: @water * 0.6;
       text-halo-fill: lighten(@water, 10);
@@ -356,34 +395,6 @@
     text-character-spacing: 3;
     text-wrap-width: 180;
     text-clip: false;
-  }
-}
-
-#area_label[zoom >=17] {
-  [type='police'],
-  [type='fire_station'],
-  [type='library'], {
-    text-name: "[name]";
-    text-halo-radius: 1.5;
-    text-halo-fill: @greenspace_halo;
-    text-face-name:@sans;
-    text-size: 11;
-    text-clip: false;
-    text-wrap-width: 30;
-    text-vertical-alignment: bottom;
-    marker-placement: point;
-    marker-file: url("img/markers/amenities/[type].svg");
-    marker-transform: "translate(0, -16)"
-  }
-
-  [type='police'] {
-    text-fill: @police_text;
-  }
-  [type='fire_station'] {
-    text-fill: @fire_station_text;
-  }
-    [type='library'] {
-    text-fill: @library_text;
   }
 }
 
