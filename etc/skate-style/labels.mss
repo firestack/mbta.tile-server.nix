@@ -270,15 +270,57 @@
 
 @small_icon_width: 19;
 @small_icon_height: 23;
-@small_icon_transform: translate(0, @small_icon_height / 2);
+@small_icon_transform: translate(0, -@small_icon_height / 2);
 
 @large_icon_width: 22;
 @large_icon_height: 26.63;
 @large_icon_transform: translate(0, -@large_icon_height / 2);
 
-@icon_y_offset: 3;
+@landmark_y_offset: 3;
 
-#area_label {
+#area_label::icons[zoom=17][area>5000]  {
+  [type='hospital'],
+  [type='college'],
+  [type='school'],
+  [type='university']  {
+    marker-placement: point;
+    marker-width: @small_icon_width;
+    marker-height: @small_icon_height;
+    marker-transform: @small_icon_transform;
+
+    [type = 'hospital'] { marker-file: url("img/markers/amenities/hospital.svg"); }  
+    
+    [type='college'],
+    [type='school'],
+    [type='university'] { 
+      marker-file: url("img/markers/amenities/school.svg"); 
+    }
+  }
+}
+
+#area_label::icons[zoom>=18][area>=0] {
+  [type='police'],  
+  [type='fire_station'], 
+  [type='library'],
+  [type='hospital'] {
+    marker-height: @large_icon_height;
+    marker-width: @large_icon_width;
+    marker-transform: @large_icon_transform;
+    marker-file: url("img/markers/amenities/[type].svg"); 
+  }
+
+  [type='college'],
+  [type='school'],
+  [type='university'] { 
+    marker-height: @large_icon_height;
+    marker-width: @large_icon_width;
+    marker-transform: @large_icon_transform;
+    marker-file: url("img/markers/amenities/school.svg"); 
+  }
+
+}
+
+#area_label::text {
   // Bring in labels gradually as one zooms in, bases on polygon area
   [zoom>=10][area>102400000],
   [zoom>=11][area>25600000],
@@ -314,18 +356,10 @@
       text-fill: @hospital * 0.6;
       text-halo-fill: @greenspace_halo;
       [zoom>=17] {
-        text-fill: @hospital_text;
+        // when zoom >=17, hospitals get landmark treatment
         text-vertical-alignment: bottom;
-        text-dy: @icon_y_offset;
-        marker-placement: point;
-        marker-file: url("img/markers/amenities/hospital.svg");
-        marker-transform: @large_icon_transform;
-        marker-width: @small_icon_width;
-        marker-height: @small_icon_height;
-      }
-      [zoom>=18] {
-        marker-width: @large_icon_width;
-        marker-height: @large_icon_height;
+        text-dy: @landmark_y_offset;
+        text-fill: @hospital_text; 
       }
     }
     [type='college'][zoom>=10],
@@ -334,37 +368,30 @@
       text-fill: @school * 0.6;
       text-halo-fill: @greenspace_halo;
       [zoom>=17] {
-        text-fill: @school_text;
+        // when zoom >=17, schools get landmark treatment
         text-vertical-alignment: bottom;
-        text-dy: @icon_y_offset;
-        marker-placement: point;
-        marker-file: url("img/markers/amenities/school.svg");
-        marker-transform: @large_icon_transform;
-        marker-width: @small_icon_width;
-        marker-height: @small_icon_height;
-
+        text-dy: @landmark_y_offset;
+        text-fill: @school_text; 
       }
-      [zoom>=18] {
-        marker-width: @large_icon_width;
-        marker-height: @large_icon_height;
+    }
+    // landmark labels
+    [zoom>=18] {
+      [type='police'] {
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @police_text; 
+      }
+      [type='fire_station'] {
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @fire_station_text; 
+      }
+      [type='library'] {
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @library_text; 
       }
     } 
-
-    [type='police'][zoom >=18],
-    [type='fire_station'][zoom >=18],
-    [type='library'][zoom >=18] {
-      text-dy: @icon_y_offset;
-      text-vertical-alignment: bottom;
-      marker-placement: point;
-      marker-file: url("img/markers/amenities/[type].svg");
-      marker-transform: @large_icon_transform;
-      marker-width: @large_icon_width;
-      marker-height: @large_icon_height;
-    
-      [type='police'] { text-fill: @police_text; }
-      [type='fire_station'] { text-fill: @fire_station_text; }
-      [type='library'] { text-fill: @library_text; }
-   }
     [type='water'][zoom>=10] {
       text-fill: @water * 0.6;
       text-halo-fill: lighten(@water, 10);
