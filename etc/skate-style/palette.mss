@@ -138,6 +138,8 @@ Map { font-directory: url(./fonts); }
 @place_halo:        fadeout(#fff,34%);
 
 @halo_white:        @place_halo;
+
+@greenspace_text:   #0b4d08;
 @greenspace_halo:   @halo_white;
 
 @country_text:      #222;
@@ -190,6 +192,12 @@ Map { font-directory: url(./fonts); }
 
 @ferry_text:        #566b82;
 @ferry_halo:        rgba(191,213,238,0.66);
+
+@library_text:      #6b541f;
+@fire_station_text: #b02a37;
+@police_text:       #165c96;
+@school_text:       #103f4a;
+@hospital_text:     #6d0937;
 
 /* ****************************************************************** */
 

@@ -268,7 +268,59 @@
 // AREA LABELS
 // =====================================================================
 
-#area_label {
+@small_icon_width: 19;
+@small_icon_height: 23;
+@small_icon_transform: translate(0, -@small_icon_height / 2);
+
+@large_icon_width: 22;
+@large_icon_height: 26.63;
+@large_icon_transform: translate(0, -@large_icon_height / 2);
+
+@landmark_y_offset: 3;
+
+#area_label::icons[zoom=17][area>5000]  {
+  [type='hospital'],
+  [type='college'],
+  [type='school'],
+  [type='university']  {
+    marker-placement: point;
+    marker-width: @small_icon_width;
+    marker-height: @small_icon_height;
+    marker-transform: @small_icon_transform;
+
+    [type = 'hospital'] { marker-file: url("img/markers/amenities/hospital.svg"); }  
+    
+    [type='college'],
+    [type='school'],
+    [type='university'] { 
+      marker-file: url("img/markers/amenities/school.svg"); 
+    }
+  }
+}
+
+#area_label::icons[zoom>=18][area>=0] {
+  [type='police'],  
+  [type='fire_station'], 
+  [type='library'],
+  [type='hospital'] {
+    marker-height: @large_icon_height;
+    marker-width: @large_icon_width;
+    marker-transform: @large_icon_transform;
+    marker-file: url("img/markers/amenities/[type].svg"); 
+  }
+
+  [type='college'],
+  [type='school'],
+  [type='university'] { 
+    marker-height: @large_icon_height;
+    marker-width: @large_icon_width;
+    marker-transform: @large_icon_transform;
+    marker-file: url("img/markers/amenities/school.svg"); 
+  }
+
+}
+
+#area_label::text {
   // Bring in labels gradually as one zooms in, bases on polygon area
   [zoom>=10][area>102400000],
   [zoom>=11][area>25600000],
@@ -289,27 +341,57 @@
     // Specific style overrides for different types of areas:
     [type='park'][zoom>=10] {
       text-face-name: @sans;
-      text-fill: @park * 0.6;
+      text-fill: @greenspace_text;
       text-halo-fill: @greenspace_halo;
     }
     [type='golf_course'][zoom>=10] {
-      text-fill: @sports * 0.6;
+      text-fill: @greenspace_text;
       text-halo-fill: @greenspace_halo;
     }
     [type='cemetery'][zoom>=10] {
-      text-fill: @cemetery * 0.6;
+      text-fill: @greenspace_text;
       text-halo-fill: @greenspace_halo;
     }
     [type='hospital'][zoom>=10] {
       text-fill: @hospital * 0.6;
       text-halo-fill: @greenspace_halo;
+      [zoom>=17] {
+        // when zoom >=17, hospitals get landmark treatment
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @hospital_text; 
+      }
     }
     [type='college'][zoom>=10],
     [type='school'][zoom>=10],
     [type='university'][zoom>=10] {
       text-fill: @school * 0.6;
       text-halo-fill: @greenspace_halo;
+      [zoom>=17] {
+        // when zoom >=17, schools get landmark treatment
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @school_text; 
+      }
     }
+    // landmark labels
+    [zoom>=18] {
+      [type='police'] {
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @police_text; 
+      }
+      [type='fire_station'] {
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @fire_station_text; 
+      }
+      [type='library'] {
+        text-vertical-alignment: bottom;
+        text-dy: @landmark_y_offset;
+        text-fill: @library_text; 
+      }
+    } 
     [type='water'][zoom>=10] {
       text-fill: @water * 0.6;
       text-halo-fill: lighten(@water, 10);
@@ -342,18 +424,6 @@
     text-clip: false;
   }
 }
-
-#poi[type='university'][zoom>=15],
-#poi[type='hospital'][zoom>=16],
-#poi[type='school'][zoom>=17],
-#poi[type='library'][zoom>=17] {
-  text-name:"[name]";
-  text-face-name:@sans;
-  text-size:10;
-  text-wrap-width:30;
-  text-fill: @poi_text;
-}
-
 
 /* ================================================================== */
 /* WATERWAY LABELS
@@ -486,7 +556,6 @@
   text-spacing: 100;
   text-size:11;
   text-clip: false;
-  text-min-padding: 5;
   [zoom>=15] { text-size:12; }
   [zoom>=17] { text-size:13; }
 }
