@@ -74,19 +74,23 @@ RUN apt-get -y install python-pip
 RUN pip install awscli
 RUN aws configure set default.s3.max_concurrent_requests 100
 COPY etc/generate_tiles.py /var/lib/postgresql/src/generate_tiles.py
-RUN chmod a+x /var/lib/postgresql/src/generate_tiles.py
 
 # install and configure styles
-RUN git clone https://github.com/jacobtoye/osm-bright.git /style --depth 1
 COPY etc/configure.py /style/configure.py
-COPY etc/osm-smartrak.osm2pgsql.mml /style/themes/osm-smartrak/osm-smartrak.osm2pgsql.mml
-COPY etc/skate-style/img /style/themes/osm-smartrak/img
 
-COPY etc/default-style/palette.mss /style/themes/default/palette.mss
-COPY etc/default-style/labels.mss /style/themes/default/labels.mss
-COPY etc/skate-style/palette.mss /style/themes/skate/palette.mss
-COPY etc/skate-style/labels.mss /style/themes/skate/labels.mss
-COPY etc/skate-style/base.mss /style/themes/skate/base.mss
+COPY etc/osm-smartrak/make.py /style/make.py
+COPY etc/osm-smartrak/utils.py /style/utils.py
+
+# add base styles to each theme directory first. The files specified in each theme directory may override these.
+COPY etc/project.osm2pgsql.mml /style/themes/default/project.osm2pgsql.mml
+COPY etc/osm-smartrak/style /style/themes/default/
+
+COPY etc/project.osm2pgsql.mml /style/themes/skate/project.osm2pgsql.mml
+COPY etc/osm-smartrak/style /style/themes/skate/
+
+COPY etc/default-style/*.mss /style/themes/default/
+COPY etc/skate-style/*.mss /style/themes/skate/
+COPY etc/skate-style/img /style/themes/skate/img
 
 # fix permissions
 RUN chown -R postgres:postgres ~postgres/
@@ -101,10 +105,9 @@ RUN touch /var/www/html/_health
 
 # copy map data loader script
 COPY ./load_map_data.sh /
-RUN chmod +x load_map_data.sh
 
 COPY ./docker-entrypoint.sh /
-RUN chmod +x docker-entrypoint.sh
+
 EXPOSE 80
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
