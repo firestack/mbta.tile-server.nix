@@ -278,7 +278,7 @@
 
 @landmark_y_offset: 3;
 
-#area_label::icons[zoom=17][area>5000]  {
+#landmarks::icons[zoom=17][area>5000]  {
   [type='hospital'],
   [type='college'],
   [type='school'],
@@ -298,7 +298,7 @@
   }
 }
 
-#area_label::icons[zoom>=18][area>=0] {
+#landmarks::icons[zoom>=18][area>=0] {
   [type='police'],  
   [type='fire_station'], 
   [type='library'],
@@ -320,7 +320,7 @@
 
 }
 
-#area_label::text {
+#landmarks::text {
   // Bring in labels gradually as one zooms in, bases on polygon area
   [zoom>=10][area>102400000],
   [zoom>=11][area>25600000],
