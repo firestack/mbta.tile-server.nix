@@ -82,10 +82,7 @@ COPY etc/osm-smartrak/make.py /style/make.py
 COPY etc/osm-smartrak/utils.py /style/utils.py
 
 # add base styles to each theme directory first. The files specified in each theme directory may override these.
-COPY etc/project.osm2pgsql.mml /style/themes/default/project.osm2pgsql.mml
 COPY etc/osm-smartrak/style /style/themes/default/
-
-COPY etc/project.osm2pgsql.mml /style/themes/skate/project.osm2pgsql.mml
 COPY etc/osm-smartrak/style /style/themes/skate/
 
 COPY etc/default-style/*.mss /style/themes/default/
