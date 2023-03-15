@@ -298,20 +298,20 @@
   }
 }
 
-#landmarks::icons[zoom>=18][area>=0] {
+#landmarks::icons[zoom>=18] {
   [type='police'],  
   [type='fire_station'], 
   [type='library'],
-  [type='hospital'] {
+  [type='hospital'][area>0] {
     marker-height: @large_icon_height;
     marker-width: @large_icon_width;
     marker-transform: @large_icon_transform;
     marker-file: url("img/markers/amenities/[type].svg"); 
   }
 
-  [type='college'],
-  [type='school'],
-  [type='university'] { 
+  [type='college'][area>0],
+  [type='school'][area>0],
+  [type='university'][area>0] { 
     marker-height: @large_icon_height;
     marker-width: @large_icon_width;
     marker-transform: @large_icon_transform;
@@ -321,6 +321,108 @@
 }
 
 #landmarks::text {
+  [zoom>=10][area>102400000],
+  [zoom>=11][area>25600000],
+  [zoom>=13][area>1600000],
+  [zoom>=14][area>320000],
+  [zoom>=15][area>80000],
+  [zoom>=16][area>20000] {
+    [type='hospital'],
+    [type='school'],
+    [type='university'],
+    [type='college'] {
+      text-name: "[name]";
+      text-halo-radius: 1.5;
+      text-face-name:@sans;
+      text-size: 11;
+      text-wrap-width:30;
+      text-clip: false;
+      [type='hospital'] {
+        text-fill: @hospital * 0.6;
+        text-halo-fill: @greenspace_halo;
+      }
+      [type='school'],
+      [type='university'],
+      [type='college']  {
+        text-fill: @school * 0.6;
+        text-halo-fill: @greenspace_halo;
+      }
+      [zoom=15][area>1600000],
+      [zoom=16][area>80000] {
+        text-size: 13;
+        text-wrap-width: 60;
+        text-character-spacing: 1;
+        text-halo-radius: 2;
+      }
+      [zoom=16][area>1600000] {
+        text-size: 15;
+        text-character-spacing: 2;
+        text-wrap-width: 120;
+      }
+    }
+  }
+  [zoom=17][area>5000][type='hospital'],
+  [zoom=17][area>5000][type='school'],
+  [zoom=17][area>5000][type='university'],
+  [zoom=17][area>5000][type='college'],
+  [zoom>=18][area>0][type='hospital'],
+  [zoom>=18][area>0][type='school'],
+  [zoom>=18][area>0][type='university'],
+  [zoom>=18][area>0][type='college'],
+  [zoom>=18][type='police'],
+  [zoom>=18][type='fire_station'],
+  [zoom>=18][type='library'] {
+    text-name: "[name]";
+    text-halo-radius: 1.5;
+    text-face-name:@sans;
+    text-size: 11;
+    text-wrap-width:30;
+    text-clip: false;
+    text-halo-fill: @greenspace_halo;
+    // position to account for icon placement
+    text-vertical-alignment: bottom;
+    text-dy: @landmark_y_offset;
+    [type='hospital'] {
+      text-fill: @hospital_text; 
+    }
+    [type='school'],
+    [type='university'],
+    [type='college']  {
+      text-fill: @school_text; 
+    }
+    [type='police'] {
+      text-fill: @police_text; 
+    }
+    [type='fire_station'] {
+      text-fill: @fire_station_text; 
+    }
+    [type='library'] {
+      text-fill: @library_text; 
+    }
+    [zoom=17][area>20000],
+    [zoom=18][area>5000] {
+      text-size: 13;
+      text-wrap-width: 60;
+      text-character-spacing: 1;
+      text-halo-radius: 2;
+    }
+    [zoom=17][area>80000],
+    [zoom=18][area>20000] {
+      text-size: 15;
+      text-character-spacing: 2;
+      text-wrap-width: 120;
+    }
+    [zoom>=17][area>1600000],
+    [zoom>=18][area>80000] {
+      text-size: 20;
+      text-character-spacing: 3;
+      text-wrap-width: 180;
+    }
+  }
+}
+
+
+#area_label::text {
   // Bring in labels gradually as one zooms in, bases on polygon area
   [zoom>=10][area>102400000],
   [zoom>=11][area>25600000],
@@ -330,98 +432,63 @@
   [zoom>=16][area>20000],
   [zoom>=17][area>5000],
   [zoom>=18][area>=0] {
-    text-name: "[name]";
-    text-halo-radius: 1.5;
-    text-face-name:@sans;
-    text-size: 11;
-    text-wrap-width:30;
-    text-fill: rgba(0,0,0,0);
-    text-halo-fill: rgba(0,0,0,0);
-    text-clip: false;
-    // Specific style overrides for different types of areas:
-    [type='park'][zoom>=10] {
-      text-face-name: @sans;
-      text-fill: @greenspace_text;
-      text-halo-fill: @greenspace_halo;
-    }
-    [type='golf_course'][zoom>=10] {
-      text-fill: @greenspace_text;
-      text-halo-fill: @greenspace_halo;
-    }
-    [type='cemetery'][zoom>=10] {
-      text-fill: @greenspace_text;
-      text-halo-fill: @greenspace_halo;
-    }
-    [type='hospital'][zoom>=10] {
-      text-fill: @hospital * 0.6;
-      text-halo-fill: @greenspace_halo;
-      [zoom>=17] {
-        // when zoom >=17, hospitals get landmark treatment
-        text-vertical-alignment: bottom;
-        text-dy: @landmark_y_offset;
-        text-fill: @hospital_text; 
+    [type='park'],
+    [type='golf_course'],
+    [type='cemetery'],
+    [type='water'] {
+      text-name: "[name]";
+      text-halo-radius: 1.5;
+      text-face-name:@sans;
+      text-size: 11;
+      text-wrap-width:30;
+      text-fill: rgba(0,0,0,0);
+      text-halo-fill: rgba(0,0,0,0);
+      text-clip: false;
+      // Specific style overrides for different types of areas:
+      [type='park'][zoom>=10] {
+        text-face-name: @sans;
+        text-fill: @greenspace_text;
+        text-halo-fill: @greenspace_halo;
+      }
+      [type='golf_course'][zoom>=10] {
+        text-fill: @greenspace_text;
+        text-halo-fill: @greenspace_halo;
+      }
+      [type='cemetery'][zoom>=10] {
+        text-fill: @greenspace_text;
+        text-halo-fill: @greenspace_halo;
+      }
+      [type='water'][zoom>=10] {
+        text-fill: @water * 0.6;
+        text-halo-fill: lighten(@water, 10);
+      }
+      [zoom=15][area>1600000],
+      [zoom=16][area>80000],
+      [zoom=17][area>20000],
+      [zoom=18][area>5000] {
+        text-name: "[name]";
+        text-size: 13;
+        text-wrap-width: 60;
+        text-character-spacing: 1;
+        text-halo-radius: 2;
+      text-clip: false;
+      }
+      [zoom=16][area>1600000],
+      [zoom=17][area>80000],
+      [zoom=18][area>20000] {
+        text-size: 15;
+        text-character-spacing: 2;
+        text-wrap-width: 120;
+        text-clip: false;
+      }
+      [zoom>=17][area>1600000],
+      [zoom>=18][area>80000] {
+        text-size: 20;
+        text-character-spacing: 3;
+        text-wrap-width: 180;
+        text-clip: false;
       }
     }
-    [type='college'][zoom>=10],
-    [type='school'][zoom>=10],
-    [type='university'][zoom>=10] {
-      text-fill: @school * 0.6;
-      text-halo-fill: @greenspace_halo;
-      [zoom>=17] {
-        // when zoom >=17, schools get landmark treatment
-        text-vertical-alignment: bottom;
-        text-dy: @landmark_y_offset;
-        text-fill: @school_text; 
-      }
-    }
-    // landmark labels
-    [zoom>=18] {
-      [type='police'] {
-        text-vertical-alignment: bottom;
-        text-dy: @landmark_y_offset;
-        text-fill: @police_text; 
-      }
-      [type='fire_station'] {
-        text-vertical-alignment: bottom;
-        text-dy: @landmark_y_offset;
-        text-fill: @fire_station_text; 
-      }
-      [type='library'] {
-        text-vertical-alignment: bottom;
-        text-dy: @landmark_y_offset;
-        text-fill: @library_text; 
-      }
-    } 
-    [type='water'][zoom>=10] {
-      text-fill: @water * 0.6;
-      text-halo-fill: lighten(@water, 10);
-    }
-  }
-  [zoom=15][area>1600000],
-  [zoom=16][area>80000],
-  [zoom=17][area>20000],
-  [zoom=18][area>5000] {
-    text-name: "[name]";
-    text-size: 13;
-    text-wrap-width: 60;
-    text-character-spacing: 1;
-    text-halo-radius: 2;
-  text-clip: false;
-  }
-  [zoom=16][area>1600000],
-  [zoom=17][area>80000],
-  [zoom=18][area>20000] {
-    text-size: 15;
-    text-character-spacing: 2;
-    text-wrap-width: 120;
-    text-clip: false;
-  }
-  [zoom>=17][area>1600000],
-  [zoom>=18][area>80000] {
-    text-size: 20;
-    text-character-spacing: 3;
-    text-wrap-width: 180;
-    text-clip: false;
   }
 }
 

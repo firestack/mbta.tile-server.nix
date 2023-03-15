@@ -85,9 +85,8 @@ COPY etc/osm-smartrak/utils.py /style/utils.py
 COPY etc/osm-smartrak/style /style/themes/default/
 COPY etc/osm-smartrak/style /style/themes/skate/
 
-COPY etc/default-style/*.mss /style/themes/default/
-COPY etc/skate-style/*.mss /style/themes/skate/
-COPY etc/skate-style/img /style/themes/skate/img
+COPY etc/default-style /style/themes/default/
+COPY etc/skate-style /style/themes/skate/
 
 # fix permissions
 RUN chown -R postgres:postgres ~postgres/
