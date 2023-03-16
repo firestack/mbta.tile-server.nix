@@ -471,7 +471,7 @@
         text-wrap-width: 60;
         text-character-spacing: 1;
         text-halo-radius: 2;
-      text-clip: false;
+        text-clip: false;
       }
       [zoom=16][area>1600000],
       [zoom=17][area>80000],
