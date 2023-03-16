@@ -82,15 +82,11 @@ COPY etc/osm-smartrak/make.py /style/make.py
 COPY etc/osm-smartrak/utils.py /style/utils.py
 
 # add base styles to each theme directory first. The files specified in each theme directory may override these.
-COPY etc/project.osm2pgsql.mml /style/themes/default/project.osm2pgsql.mml
 COPY etc/osm-smartrak/style /style/themes/default/
-
-COPY etc/project.osm2pgsql.mml /style/themes/skate/project.osm2pgsql.mml
 COPY etc/osm-smartrak/style /style/themes/skate/
 
-COPY etc/default-style/*.mss /style/themes/default/
-COPY etc/skate-style/*.mss /style/themes/skate/
-COPY etc/skate-style/img /style/themes/skate/img
+COPY etc/default-style /style/themes/default/
+COPY etc/skate-style /style/themes/skate/
 
 # fix permissions
 RUN chown -R postgres:postgres ~postgres/
