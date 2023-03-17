@@ -230,15 +230,29 @@ if __name__ == "__main__":
     if not tile_dir.endswith('/'):
         tile_dir = tile_dir + '/'
 
-    try: 
-        thread_count = int(os.environ['BATCH_JOB_COUNT'])
-        current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])
-        bbox = slice_map(thread_count, current_thread, map_type)
-    except KeyError:
-        print "WARN: AWS Batch variables were not set, running in single-threaded mode"
-        bbox = slice_map(thread_count=1, current_thread=0, map_type=map_type)
-    except ValueError, t:
-        print "ERROR: Unable to parse AWS Batch variables"
-        raise ValueError(t)
+ 
+    if 'RETRY_JOB_ORIGINAL_BATCH_JOB_COUNT' in os.environ:
+        try: 
+            print "Using rety job configuration"
+            thread_count = int(os.environ['RETRY_JOB_ORIGINAL_BATCH_JOB_COUNT'])
+            current_thread = int(os.environ['RETRY_JOB_ORIGINAL_JOB_ARRAY_INDEX'])
+            bbox = slice_map(thread_count, current_thread, map_type)
+        except KeyError, e:
+            print "ERROR: RETRY_JOB_ORIGINAL_JOB_ARRAY_INDEX variable not set"
+            raise KeyError(e)
+        except ValueError, t:
+            print "ERROR: Unable to parse retry job variables"
+            raise ValueError(t)
+    else: 
+        try: 
+            thread_count = int(os.environ['BATCH_JOB_COUNT'])
+            current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])
+            bbox = slice_map(thread_count, current_thread, map_type)
+        except KeyError:
+            print "WARN: AWS Batch variables were not set, running in single-threaded mode"
+            bbox = slice_map(thread_count=1, current_thread=0, map_type=map_type)
+        except ValueError, t:
+            print "ERROR: Unable to parse AWS Batch variables"
+            raise ValueError(t)
 
     render_tiles(bbox, mapfile, tile_dir, 1, 18, "MBTA", 4)
