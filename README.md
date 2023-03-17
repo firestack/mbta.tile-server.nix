@@ -127,7 +127,7 @@ The generate_tiles.py script uses the following environment variables to determi
 
 Sometimes, a subset of the parallel child jobs may fail. to retry a specific child job, set the following environment variables (`AWS_BATCH_JOB_ARRAY_INDEX` will be ignored).
 
-- `BATCH_JOB_COUNT`: The `BATCH_JOB_COUNT` value of the job to retry
+- `BATCH_JOB_COUNT`: The `BATCH_JOB_COUNT` value of the job to retry. Unlike for regular job runs, this does not need to match "Array Size". "Array Size" should not be specified.
 - `AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE`: The `AWS_BATCH_JOB_ARRAY_INDEX` of the job to retry
 
 ### Copy Tiles Between S3 Buckets
