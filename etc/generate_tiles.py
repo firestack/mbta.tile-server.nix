@@ -232,7 +232,7 @@ if __name__ == "__main__":
 
     try: 
         if 'AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE' in os.environ:
-            print "Using rety job configuration"
+            print "Using retry job configuration"
             current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE'])
         else:
             current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])
