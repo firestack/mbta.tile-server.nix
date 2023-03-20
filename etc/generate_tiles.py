@@ -231,8 +231,13 @@ if __name__ == "__main__":
         tile_dir = tile_dir + '/'
 
     try: 
+        if 'AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE' in os.environ:
+            print "Using retry job configuration"
+            current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE'])
+        else:
+            current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])
+
         thread_count = int(os.environ['BATCH_JOB_COUNT'])
-        current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])
         bbox = slice_map(thread_count, current_thread, map_type)
     except KeyError:
         print "WARN: AWS Batch variables were not set, running in single-threaded mode"
