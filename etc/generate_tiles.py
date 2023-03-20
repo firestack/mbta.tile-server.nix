@@ -231,9 +231,9 @@ if __name__ == "__main__":
         tile_dir = tile_dir + '/'
 
     try: 
-        if 'AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE' in os.environ:
+        if 'RETRY_AWS_BATCH_JOB_ARRAY_INDEX' in os.environ:
             print "Using retry job configuration"
-            current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX_OVERRIDE'])
+            current_thread = int(os.environ['RETRY_AWS_BATCH_JOB_ARRAY_INDEX'])
         else:
             current_thread = int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])
 
