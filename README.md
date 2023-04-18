@@ -153,3 +153,6 @@ $ docker run --tty \
     --env AWS_SECRET_ACCESS_KEY="my-aws-secret-access-key" \
     --publish="80:80" tile-server copy
 ```
+
+> **Note**
+> When updating tiles hosted behind our CDN, you'll need to invalidate the CDN cache to reliably display all new tiles. This can be done easily in the AWS Cloudfront console by creating a new Invalidation for the relevant distribution, specifying `/osm_tiles/*` as the path.
