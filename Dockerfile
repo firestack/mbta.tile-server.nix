@@ -20,7 +20,7 @@ RUN /etc/init.d/postgresql start &&\
 
 #build osm2pgsql
 USER root
-RUN git clone https://github.com/openstreetmap/osm2pgsql.git ~postgres/src/osm2pgsql --depth 1
+RUN git clone https://github.com/openstreetmap/osm2pgsql.git ~postgres/src/osm2pgsql --depth 1 --branch 1.8.1
 RUN apt-get -y install make cmake g++ libboost-dev libboost-system-dev libboost-filesystem-dev libexpat1-dev\
   zlib1g-dev libbz2-dev libpq-dev libgeos-dev libgeos++-dev libproj-dev lua5.2 liblua5.2-dev osmctools
 RUN cd ~postgres/src/osm2pgsql && mkdir build && cd build && cmake .. && make && make install
