@@ -14,6 +14,7 @@
 		in {
 			packages = rec {
 				mod_tile = pkgs.callPackage ./mod_tile.nix {};
+				default = mod_tile;
 			};
 
 			devShell =
@@ -41,7 +42,14 @@
 				virtualisation.vmVariant.virtualisation.graphics = false;
 			};
 			nixosConfigurations.linuxBase = nixpkgs.lib.nixosSystem {
-				# system = "x86_64-linux";
+				system = "x86_64-linux";
+				modules = [
+					self.nixosModules.base
+					self.nixosModules.vm
+				];
+			};
+
+			nixosConfigurations.darwinVM = nixpkgs.lib.nixosSystem {
 				system = "aarch64-linux";
 				modules = [
 					self.nixosModules.base
@@ -51,8 +59,6 @@
 					}
 				];
 			};
-
-			packages.aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
+			# packages.aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
 		};
-	};
 }

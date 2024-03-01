@@ -33,7 +33,7 @@ if [ ! -f "${map_data_path}/merged.osm.pbf" ]; then
     done
 
     # merge map data
-    # `osmium merge` allows duplicates, which did not allow us to utilize osm2pgsql 
+    # `osmium merge` allows duplicates, which did not allow us to utilize osm2pgsql
     # in slim mode, so here we convert the files first to .o5m before merging
     osmconvert "${map_data_path}/massachusetts-latest.osm.pbf" -o="${map_data_path}/massachusetts-latest.o5m"
     osmconvert "${map_data_path}/rhode-island-latest.osm.pbf" -o="${map_data_path}/rhode-island-latest.o5m"
@@ -52,9 +52,10 @@ if [ -z "${STYLE_DIR}" ]; then
 fi
 
 # download shapefiles and build style
-shape_path="/style/shp"
+style_root="/style"
+shape_path="$style_root/shp"
 if [ ! -d "${shape_path}" ]; then
-  mkdir "${shape_path}" 
+  mkdir "${shape_path}"
   cd "${shape_path}"
   wget http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip
   wget http://tilemill-data.s3.amazonaws.com/osm/coastline-good.zip
@@ -62,9 +63,11 @@ if [ ! -d "${shape_path}" ]; then
   wget http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.4.0/cultural/10m-populated-places-simple.zip
   unzip "*.zip"
   find -iname '*.shp' -execdir shapeindex {} \;
+fi
 
+if [ ! -e "$style_root/output/TargetTheme/project.mml" ]; then
   cp -r /style/themes/$STYLE_DIR /style/themes/target
-  mkdir /style/output
+  mkdir -p /style/output
   cd /style && ./make.py
   cd /style/output/TargetTheme && carto project.mml > mapnik.xml
   # additional fonts requred for tile generation
@@ -77,6 +80,7 @@ fi
 
 # populate database
 if [ `psql -t --dbname="gis" --command="SELECT COUNT(*) from information_schema.tables WHERE table_name LIKE 'planet_osm_%';"` -eq 0 ]; then
+  echo -e "import into database"
   osm2pgsql -d gis --create --slim -G --hstore -C 5000 --number-processes 4 "${map_data_path}/merged.osm.pbf"
 fi
 

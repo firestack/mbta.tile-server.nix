@@ -1,64 +1,87 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, autoreconfHook
-, glib
-, pkgconfig
+
 , apacheHttpd
-, iniparser
-, mapnik
+, apr
+, aprutil
+, autoreconfHook
 , boost
-, icu
-, harfbuzz
 , cairo
-, proj
-, sqlite
+, cmake
+, curl
+, glib
+, harfbuzz
+, icu
+, iniparser
 , libtiff
 , libwebp
+, mapnik
+, pkgconfig
+, proj
+, sqlite
 }:
 
 stdenv.mkDerivation rec {
 	pname = "mod-tile";
-	version = "0.6.1";
+	version = "be0d5fe2567d058d4dcbc0fb6d3f178b74be5a51";
 
 	src = fetchFromGitHub {
 		owner = "openstreetmap";
 		repo = "mod_tile";
 		rev = version;
-		hash = "sha256-0cwUUoiRChTaYdFxAdtm+Mn8ZKVyse7jYF4t7jF6u3Y=";
+		# hash = "sha256-0cwUUoiRChTaYdFxAdtm+Mn8ZKVyse7jYF4t7jF6u3Y=";
+		hash = "sha256-/EGha2hXcjjZqlh3hWaNiwdytZFYRAWbHfsqSYjs5+k=";
 	};
 
 	# CFLAGS = "_DEFAULT_SOURCE=1";
 	# buildFlags = ["_DEFAULT_SOURCE=1" "-ansi"];
 
+	# configureFlags = [
+	# 	"--with-apr=${apr.dev}"
+	# 	"--with-apr-util=${aprutil.dev}"
+	# ];
+
 	nativeBuildInputs = [
 		autoreconfHook
-		glib
-		pkgconfig
+		# cmake
+
 		apacheHttpd
-		iniparser
-		mapnik
+		apr
+		aprutil
 		boost
-		icu
-		harfbuzz
 		cairo
-		proj
-		sqlite
+		curl
+		glib
+		harfbuzz
+		icu
+		iniparser
 		libtiff
 		libwebp
+		mapnik
+		pkgconfig
+		proj
+		sqlite
 	];
 
-	preBuild = ''
-		buildFlagsArray+=(CFLAGS="-ansi" _DEFAULT_SOURCE=1)
-		substituteInPlace src/daemon.c --replace '<iniparser/iniparser.h>' '<iniparser.h>'
-		substituteInPlace src/gen_tile_test.cpp --replace '<mapnik/box2d.hpp>' '<mapnik/geometry/box2d.hpp>'
-	'';
+
+	installFlags = [
+		"INCLUDEDIR=${placeholder "out"}/include"
+		"LIBEXECDIR=${placeholder "out"}/modules"
+		"DESTDIR=${placeholder "out"}"
+	];
+
+		# substituteInPlace src/daemon.c --replace '<iniparser/iniparser.h>' '<iniparser.h>'
+		# substituteInPlace src/gen_tile_test.cpp --replace '<mapnik/box2d.hpp>' '<mapnik/geometry/box2d.hpp>'
+	# preBuild = ''
+	# 	buildFlagsArray+=(CFLAGS="-ansi" _DEFAULT_SOURCE=1)
+	# '';
 
 	# buildInputs = [
 	# ];
 
-	preConfigure = "bash ./autogen.sh";
-	installTargets = "install-mod_tile";
+	# preConfigure = "bash ./autogen.sh";
+	installTargets = "install install-mod_tile";
 
 	meta = with lib; {
 		description = "Renders map tiles with mapnik and serves them using apache";
